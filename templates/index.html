@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compression</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .image-container {
+            text-align: center;
+        }
+        img {
+            max-width: 400px;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Compression</h1>
+
+    <form action="/compress" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Compress</button>
+    </form>
+
+    <hr>
+    <div class="container">
+        <div class="image-container">
+            <h2>Original Image</h2>
+            <img src="{{ original_url }}" id="original-img" alt="Original Image">
+        </div>
+
+        <div class="image-container">
+            <h2>Compressed Image</h2>
+            <img src="{{ compressed_url }}" id="compressed-img" alt="Compressed Image">
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <div class="image-container">
+            <a id="download-link" download="compressed_image.png">
+                <button>Download Compressed Image</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function displayImages(originalUrl, compressedUrl) {
+            document.getElementById('original-img').src = originalUrl;
+            document.getElementById('compressed-img').src = compressedUrl;
+
+            var downloadLink = document.getElementById('download-link');
+            downloadLink.href = compressedUrl;
+        }
+
+        // Call displayImages function with URLs passed from Flask
+        displayImages("{{ original_url }}", "{{ compressed_url }}");
+    </script>
+</body>
+</html>
