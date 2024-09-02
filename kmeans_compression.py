@@ -44,7 +44,7 @@ def run_kMeans(X, initial_centroids, iter):
 
 def startCompressing(X_img):
     k = 16
-    iter = 10
+    iter =2
     initial_centroids = initialize_centroid(X_img, k)
     centroids, idx = run_kMeans(X_img, initial_centroids, iter)
     
